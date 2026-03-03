@@ -2,6 +2,7 @@ openapi: 3.0.3
 info:
   title: Employee Leave Management API
   version: 1.0.0
+  description: API for creating and managing employee leave requests.
 paths:
   /api/v1/leaves:
     get:
@@ -11,17 +12,24 @@ paths:
           name: status
           schema:
             type: string
+            description: Filter by status (PENDING, APPROVED, REJECTED)
         - in: query
           name: limit
           schema:
             type: integer
+            default: 100
         - in: query
           name: offset
           schema:
             type: integer
+            default: 0
       responses:
         '200':
-          description: OK
+          description: A list of leaves
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaveList'
     post:
       summary: Create a leave request
       requestBody:
@@ -29,69 +37,73 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              required: [employee_id, start_date, end_date]
-              properties:
-                employee_id:
-                  type: string
-                employee_email:
-                  type: string
-                start_date:
-                  type: string
-                  format: date
-                end_date:
-                  type: string
-                  format: date
-                reason:
-                  type: string
-                approver_email:
-                  type: string
+              $ref: '#/components/schemas/LeaveCreate'
       responses:
         '201':
           description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Leave'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
   /api/v1/leaves/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        description: UUID of the leave request
     get:
       summary: Get a leave by id
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Leave'
+        '404':
+          $ref: '#/components/responses/NotFound'
     put:
-      summary: Update a leave
-      parameters:
-        - in: path
-          name: id
-          required: true
+      summary: Update a leave (replace)
       requestBody:
+        required: true
         content:
           application/json:
             schema:
-              type: object
+              $ref: '#/components/schemas/LeaveUpdate'
       responses:
         '200':
           description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Leave'
+        '404':
+          $ref: '#/components/responses/NotFound'
     delete:
       summary: Delete a leave
-      parameters:
-        - in: path
-          name: id
-          required: true
       responses:
         '204':
           description: No Content
+        '404':
+          $ref: '#/components/responses/NotFound'
+
   /api/v1/leaves/{id}/status:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        description: UUID of the leave request
     patch:
       summary: Update status for a leave
-      parameters:
-        - in: path
-          name: id
-          required: true
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -99,26 +111,166 @@ paths:
               properties:
                 status:
                   type: string
+                  description: New status (PENDING, APPROVED, REJECTED)
       responses:
         '200':
           description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Leave'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
   /api/v1/leaves/{id}/approve:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        description: UUID of the leave request
     post:
       summary: Approve leave
-      parameters:
-        - in: path
-          name: id
-          required: true
       responses:
         '200':
           description: Approved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Leave'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
   /api/v1/leaves/{id}/reject:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        description: UUID of the leave request
     post:
       summary: Reject leave
-      parameters:
-        - in: path
-          name: id
-          required: true
       responses:
         '200':
           description: Rejected
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Leave'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+  schemas:
+    Leave:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        employee_id:
+          type: string
+        employee_email:
+          type: string
+          format: email
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        reason:
+          type: string
+        status:
+          type: string
+          description: PENDING, APPROVED, REJECTED
+        approver_email:
+          type: string
+          format: email
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    LeaveCreate:
+      type: object
+      required:
+        - employee_id
+        - start_date
+        - end_date
+      properties:
+        employee_id:
+          type: string
+        employee_email:
+          type: string
+          format: email
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        reason:
+          type: string
+        approver_email:
+          type: string
+          format: email
+
+    LeaveUpdate:
+      type: object
+      properties:
+        employee_id:
+          type: string
+        employee_email:
+          type: string
+          format: email
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        reason:
+          type: string
+        approver_email:
+          type: string
+          format: email
+        status:
+          type: string
+
+    LeaveList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Leave'
+        total:
+          type: integer
+
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+
