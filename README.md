@@ -42,6 +42,7 @@ openchoreo-case-studies/
 | Name | Type | Description |
 |------|------|-------------|
 | [Inventory Management System](./Examples/three%20tier%20web%20application/readme.md) | Example | Three-tier app with Next.js (Web App), Express.js (Service), and PostgreSQL (Stateful) on OpenChoreo |
+| [Employee Leave Management](./Examples/employee%20leave%20management/readme.md) | Example | Leave request workflow + Scheduled Task reminders (Next.js, Express.js, PostgreSQL) |
 
 > 💡 Have a project built with OpenChoreo? We'd love to feature it here! See [CONTRIBUTING.md](./CONTRIBUTING.md) to get started.
 
