@@ -28,7 +28,7 @@ openchoreo-case-studies/
 
 ### Prerequisites
 
-- A running OpenChoreo environment — see the [OpenChoreo documentation](https://github.com/openchoreo/openchoreo) to get started
+- A running OpenChoreo environment — see the [OpenChoreo documentation](https://openchoreo.dev/docs/) to get started
 - Basic familiarity with Kubernetes and cloud-native concepts
 
 ### Using a Case Study or Example
