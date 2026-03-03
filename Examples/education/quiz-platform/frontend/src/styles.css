@@ -1,0 +1,149 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+nav {
+  background: #1e293b;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  height: 56px;
+  gap: 2rem;
+  border-bottom: 1px solid #334155;
+}
+
+nav .brand { font-size: 1.1rem; font-weight: 700; color: #f8fafc; margin-right: auto; }
+nav a { color: #94a3b8; text-decoration: none; font-weight: 500; padding: 0.3rem 0.7rem; border-radius: 4px; transition: background 0.2s; }
+nav a:hover, nav a.active { background: #334155; color: #f8fafc; }
+
+.page { max-width: 860px; margin: 2rem auto; padding: 0 1rem; }
+
+h2 { color: #f1f5f9; margin-top: 0; }
+h3 { color: #cbd5e1; margin-top: 0; }
+
+.card {
+  background: #1e293b;
+  border-radius: 10px;
+  border: 1px solid #334155;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.quiz-list { display: grid; gap: 1rem; }
+
+.quiz-card {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quiz-card h4 { margin: 0 0 0.3rem; color: #f1f5f9; }
+.quiz-card p { margin: 0; color: #64748b; font-size: 0.88rem; }
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.15s;
+}
+
+button:hover { opacity: 0.85; transform: translateY(-1px); }
+
+.btn-primary  { background: #3b82f6; color: #fff; }
+.btn-success  { background: #22c55e; color: #fff; }
+.btn-danger   { background: #ef4444; color: #fff; }
+.btn-outline  { background: transparent; border: 1px solid #475569; color: #94a3b8; }
+.btn-sm       { padding: 0.3rem 0.65rem; font-size: 0.82rem; }
+
+input, select {
+  background: #0f172a;
+  border: 1px solid #475569;
+  border-radius: 6px;
+  color: #e2e8f0;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.9rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input::placeholder { color: #64748b; }
+input:focus, select:focus { outline: none; border-color: #3b82f6; }
+
+label { display: block; margin-bottom: 0.35rem; font-size: 0.85rem; font-weight: 600; color: #94a3b8; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.form-row.single { grid-template-columns: 1fr; }
+
+/* Quiz Session UI */
+.question-card {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 2rem;
+  margin-bottom: 1rem;
+}
+
+.question-text { font-size: 1.15rem; font-weight: 600; color: #f1f5f9; margin-bottom: 1.5rem; }
+
+.options { display: grid; gap: 0.75rem; }
+
+.option-btn {
+  background: #1e293b;
+  border: 2px solid #334155;
+  border-radius: 8px;
+  padding: 0.8rem 1.2rem;
+  color: #e2e8f0;
+  text-align: left;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.option-btn:hover:not(:disabled) { border-color: #3b82f6; background: #1e3a5f; }
+.option-btn.correct  { border-color: #22c55e; background: #052e16; color: #86efac; }
+.option-btn.wrong    { border-color: #ef4444; background: #2d0a0a; color: #fca5a5; }
+.option-btn.selected { border-color: #3b82f6; }
+.option-btn:disabled { cursor: not-allowed; opacity: 0.8; }
+
+.score-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 0.8rem 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.score-bar .label { color: #94a3b8; font-size: 0.88rem; }
+.score-bar .value { font-size: 1.3rem; font-weight: 700; color: #3b82f6; margin-left: auto; }
+
+.result-card {
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.result-card .big-score { font-size: 3rem; font-weight: 800; color: #3b82f6; }
+.result-card p { color: #94a3b8; }
+
+.badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.78rem; font-weight: 600; }
+.badge-blue { background: #1e3a5f; color: #60a5fa; }
+
+.progress-bar-wrap { background: #334155; border-radius: 100px; height: 6px; margin-bottom: 1.2rem; }
+.progress-bar { background: #3b82f6; height: 6px; border-radius: 100px; transition: width 0.4s; }
+
+.error { color: #f87171; font-size: 0.88rem; margin-bottom: 0.5rem; }
+.ws-status { font-size: 0.8rem; padding: 0.2rem 0.6rem; border-radius: 4px; }
+.ws-status.connected { background: #052e16; color: #86efac; }
+.ws-status.disconnected { background: #2d0a0a; color: #fca5a5; }

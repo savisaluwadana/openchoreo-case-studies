@@ -45,6 +45,8 @@ openchoreo-case-studies/
 | [Employee Leave Management](./Examples/employee%20leave%20management/readme.md) | Example | Leave request workflow + Scheduled Task reminders (Next.js, Express.js, PostgreSQL) |
 | [Expense Tracking & Reporting](./Examples/finance/expense-tracking/readme.md) | Example | Expense CRUD + Reporting (Vue.js, Spring Boot, MySQL) |
 | [Invoice Management System](./Examples/finance/invoice-management/readme.md) | Example | Invoice PDF generation + Scheduled payment reminders (Node.js, Vue.js, MySQL) |
+| [Course & Student Management Portal](./Examples/education/course-student-portal/readme.md) | Example | Course/enrollment management portal (Angular 17, Django 4.2, PostgreSQL) — Python Dockerfile buildpack |
+| [Quiz & Assessment Platform](./Examples/education/quiz-platform/readme.md) | Example | Real-time quiz scoring via WebSocket Service component (Angular 17, Node.js + ws, PostgreSQL) |
 
 > 💡 Have a project built with OpenChoreo? We'd love to feature it here! See [CONTRIBUTING.md](./CONTRIBUTING.md) to get started.
 
