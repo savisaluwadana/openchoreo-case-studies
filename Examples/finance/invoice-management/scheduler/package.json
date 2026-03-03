@@ -1,0 +1,12 @@
+{
+  "name": "invoice-scheduler",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "node-cron": "^3.0.2",
+    "mysql2": "^3.5.0"
+  }
+}
