@@ -5,3 +5,10 @@ RUN npm ci --production
 COPY src/ ./src
 EXPOSE 8081
 CMD ["node","src/index.js"]
+FROM node:20-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --production
+COPY src/ ./src
+EXPOSE 8081
+CMD ["node","src/index.js"]
