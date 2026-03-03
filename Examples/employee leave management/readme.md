@@ -63,3 +63,7 @@ Next steps
 - (Optional) Configure SMTP as a secret or use a 3rd-party email connection from the marketplace.
 
 See the example code under each folder for implementation details.
+
+Additional notes
+- The backend includes an `openapi.yaml` file under `backend/` which you can attach to an API Proxy during component creation to provide an interactive API console.
+- There's a simple smoke-test script at `backend/test.sh` that creates a sample leave request; it uses `jq` for pretty output (install via `brew install jq`).
