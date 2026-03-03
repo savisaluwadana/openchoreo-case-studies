@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/expenses}
+    username: ${SPRING_DATASOURCE_USERNAME:expense_user}
+    password: ${SPRING_DATASOURCE_PASSWORD:expense_pass}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 8080
