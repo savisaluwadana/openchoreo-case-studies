@@ -1,0 +1,124 @@
+openapi: 3.0.3
+info:
+  title: Employee Leave Management API
+  version: 1.0.0
+paths:
+  /api/v1/leaves:
+    get:
+      summary: List leaves
+      parameters:
+        - in: query
+          name: status
+          schema:
+            type: string
+        - in: query
+          name: limit
+          schema:
+            type: integer
+        - in: query
+          name: offset
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create a leave request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [employee_id, start_date, end_date]
+              properties:
+                employee_id:
+                  type: string
+                employee_email:
+                  type: string
+                start_date:
+                  type: string
+                  format: date
+                end_date:
+                  type: string
+                  format: date
+                reason:
+                  type: string
+                approver_email:
+                  type: string
+      responses:
+        '201':
+          description: Created
+  /api/v1/leaves/{id}:
+    get:
+      summary: Get a leave by id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+    put:
+      summary: Update a leave
+      parameters:
+        - in: path
+          name: id
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete a leave
+      parameters:
+        - in: path
+          name: id
+          required: true
+      responses:
+        '204':
+          description: No Content
+  /api/v1/leaves/{id}/status:
+    patch:
+      summary: Update status for a leave
+      parameters:
+        - in: path
+          name: id
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+      responses:
+        '200':
+          description: Updated
+  /api/v1/leaves/{id}/approve:
+    post:
+      summary: Approve leave
+      parameters:
+        - in: path
+          name: id
+          required: true
+      responses:
+        '200':
+          description: Approved
+  /api/v1/leaves/{id}/reject:
+    post:
+      summary: Reject leave
+      parameters:
+        - in: path
+          name: id
+          required: true
+      responses:
+        '200':
+          description: Rejected
