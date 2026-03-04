@@ -20,7 +20,7 @@ This example showcases how to deploy a Python (Django) backend as a **Service** 
 │                                          │ Connection       │
 │                                 ┌────────▼──────────┐      │
 │                                 │  Managed PostgreSQL │      │
-│                                 │  (Aiven / Choreo)  │      │
+│                                 │  can be in h  │      │
 │                                 └────────────────────┘      │
 └─────────────────────────────────────────────────────────────┘
 ```
